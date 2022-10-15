@@ -1,0 +1,44 @@
+import express, { Application, Request, Response, Router } from 'express'
+//TODO: import orm from './core/orm.core'
+import cors from 'cors'
+import helmet from "helmet"
+import ExampleController from './controllers/ExampleController'
+import BaseController from './shared/domain/BaseController'
+
+export default class Server {
+  private controllers: Object[] = [
+    new ExampleController()
+  ]
+
+  constructor(public app: Application = express()) {
+    this.config()
+    this.routes()
+  }
+
+  public config(): void {
+    this.app.set('port', 3000)
+    this.app.use(helmet())
+    this.app.use(cors())
+    this.app.use(express.json())
+    this.app.use(express.urlencoded({ extended: false }))
+  }
+
+  public routes(): void {
+    this.controllers.forEach((c: BaseController) => this.app.use(c.path, c.router))
+  }
+
+  public async start(): Promise<boolean> {
+    try {
+      // await orm.connect();
+      this.app.listen(this.app.get('port'), () => {
+        console.log(`Corte Legal lawyers Server on port ${this.app.get('port')}`)
+      });
+    } catch (error) {
+      console.error(`Corte Legal lawye Server isn´t working: ${error instanceof Error ? error.message : 'Undefined error'}`)
+      return false
+    }
+    return true
+  }
+}
+
+
