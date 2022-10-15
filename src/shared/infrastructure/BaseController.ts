@@ -1,14 +1,17 @@
 import authv, { BasicAuthResult } from "basic-auth";
 import { Request, Response, Router } from "express";
-import { HttpCodes } from "./BaseController.enum";
-import Error from "./Error";
-import { InvalidApiKeyException, InvalidUserException } from "./exceptions/AuthExceptions";
+import { Schema, ValidationError, Validator } from 'jsonschema';
+import { HttpCodes } from "../domain/Http.enum";
+import Error from "../domain/Error";
+import { InvalidApiKeyException, InvalidUserException } from "../domain/exceptions/AuthExceptions";
+import { InvalidSchemaException } from "../domain/exceptions/ValidationExceptions";
 
 export default abstract class BaseController {
 
     constructor(
         private _path: string,
-        private _router: Router = Router()
+        private _router: Router = Router(),
+        private _validator: Validator = new Validator()
     ) {
         this.config()
     }
@@ -25,6 +28,17 @@ export default abstract class BaseController {
      * Router config
      */
     protected abstract config(): void
+
+    protected validate(request: Request, schema: Schema): void {
+        const { valid, errors } = this._validator.validate(request.body, schema)
+        if (!valid) {
+            throw new InvalidSchemaException(this.stringifyErrors(errors))
+        }
+    }
+
+    private stringifyErrors(errors: ValidationError[]): string {
+        return errors.map(({ stack }) => `${stack}`).toString()
+    }
 
     protected auth(req: Request): void {
         const credentials: BasicAuthResult | undefined = authv(req)

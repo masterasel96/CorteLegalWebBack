@@ -1,4 +1,4 @@
-import { HttpCodes, HttpMessages } from "../BaseController.enum";
+import { HttpCodes, HttpMessages } from "../Http.enum";
 import DomainError from "../Error";
 
 export class InvalidApiKeyException extends DomainError {
