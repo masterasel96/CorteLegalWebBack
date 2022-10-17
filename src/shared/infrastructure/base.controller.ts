@@ -1,10 +1,10 @@
 import authv, { BasicAuthResult } from "basic-auth";
 import { Request, Response, Router } from "express";
 import { Schema, ValidationError, Validator } from 'jsonschema';
-import { HttpCodes } from "../domain/Http.enum";
-import Error from "../domain/Error";
-import { InvalidApiKeyException, InvalidUserException } from "../domain/exceptions/AuthExceptions";
-import { InvalidSchemaException } from "../domain/exceptions/ValidationExceptions";
+import { HttpCodes } from "../domain/http.enum";
+import Error from "../domain/domain.error";
+import { InvalidApiKeyException, InvalidUserException } from "../domain/exceptions/auth.exception";
+import { InvalidSchemaException } from "../domain/exceptions/validation.exception";
 
 export default abstract class BaseController {
 

@@ -1,5 +1,5 @@
-import { HttpCodes, HttpMessages } from "../Http.enum";
-import DomainError from "../Error";
+import { HttpCodes, HttpMessages } from "../http.enum";
+import DomainError from "../domain.error";
 
 export class InvalidSchemaException extends DomainError {
     constructor(

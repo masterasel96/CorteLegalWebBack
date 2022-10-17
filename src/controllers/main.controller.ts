@@ -1,6 +1,6 @@
 import { Request, Response } from "express"
-import BaseController from "../shared/infrastructure/BaseController"
-import { HttpMessages } from "../shared/domain/Http.enum"
+import BaseController from "../shared/infrastructure/base.controller"
+import { HttpMessages } from "../shared/domain/http.enum"
 
 export default class MainController extends BaseController {
     constructor() {

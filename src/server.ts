@@ -2,9 +2,9 @@ import express, { Application, Request, Response, Router } from 'express'
 //TODO: import orm from './core/orm.core'
 import cors from 'cors'
 import helmet from "helmet"
-import MainController from './controllers/MainController'
-import BaseController from './shared/infrastructure/BaseController'
-import MailerController from './controllers/MailerController'
+import MainController from './controllers/main.controller'
+import BaseController from './shared/infrastructure/base.controller'
+import MailerController from './controllers/mail.controller'
 
 export default class Server {
   private controllers: Object[] = [
