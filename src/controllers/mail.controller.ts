@@ -2,10 +2,16 @@ import { Request, Response } from "express"
 import BaseController from "../shared/infrastructure/base.controller"
 import { HttpMessages } from "../shared/domain/http.enum"
 import { sendMailSchema } from "../shared/infrastructure/schemas/mailer.schemas"
+import MailSenderQueryHandler from "../mailer/application/mail_sender.query_handler"
+import MailRepository from "../mailer/infrastructure/mail.repository"
+import Mail from "../mailer/domain/mail.entity"
 
 export default class MailerController extends BaseController {
-    constructor() {
+    constructor(
+        private mailSenderQH: MailSenderQueryHandler = null
+    ) {
         super('/mail')
+        this.init()
     }
 
     protected config(): void {
@@ -16,10 +22,16 @@ export default class MailerController extends BaseController {
         try {
             this.auth(req)
             this.validate(req, sendMailSchema)
-            //TODO: query handler send email...
+            const mail = Mail.fromObject(req.body)
+            this.mailSenderQH.send(mail)
             this.successJson(res, HttpMessages.SUCCESS_OPERATION_MESSAGE)
         } catch (error) {
             this.catchError(res, error)
         }
+    }
+
+    private init(): void {
+        const mailRepository = new MailRepository();
+        this.mailSenderQH = new MailSenderQueryHandler(mailRepository)
     }
 }

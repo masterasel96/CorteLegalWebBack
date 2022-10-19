@@ -32,6 +32,16 @@ export default class Mail {
         return this._description
     }
 
+    public toHtmlString(): string {
+        return `<div>
+            <p><strong>Nombre: </strong>${this.name} ${this.surnames}<p>
+            <p><strong>Email: </strong>${this.email}<p>
+            <p><strong>Telefono: </strong>${this.phone}<p>
+            <p><strong>Asunto: </strong>${this.issue}<p>
+            <p>${this.description ?? 'Sin descripción....'}<p>
+        </div>`
+    }
+
     public static fromObject({
         name, surnames, email, 
         phone, issue, description

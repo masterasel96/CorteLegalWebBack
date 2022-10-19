@@ -1,7 +1,7 @@
 import Mail from "./mail.entity";
 
-export interface MailerDataSource {
+export default interface MailerPort {
 
-    send(mail: Mail): Promise<boolean>
+    send(mail: Mail): void
 
 }
