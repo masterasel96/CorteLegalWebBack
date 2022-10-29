@@ -1,5 +1,4 @@
-import express, { Application, Request, Response, Router } from 'express'
-//TODO: import orm from './core/orm.core'
+import express, { Application } from 'express'
 import cors from 'cors'
 import helmet from "helmet"
 import MainController from './controllers/main.controller'
@@ -31,7 +30,6 @@ export default class Server {
 
   public async start(): Promise<boolean> {
     try {
-      // await orm.connect();
       this.app.listen(this.app.get('port'), () => {
         console.log(`Corte Legal lawyers Server on port ${this.app.get('port')}`)
       });
