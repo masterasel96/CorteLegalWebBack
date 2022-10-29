@@ -1,4 +1,5 @@
 import { Schema } from "jsonschema"
+import { Languajes } from "../../domain/languajes.enum"
 
 export const sendMailSchema: Schema = {
     type: "object",
@@ -23,6 +24,9 @@ export const sendMailSchema: Schema = {
         },
         description: {
             type: "string"
+        },
+        languaje: {
+            enum: Object.values(Languajes)
         }
     },
     required: [

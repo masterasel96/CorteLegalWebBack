@@ -1,3 +1,5 @@
+import { Languajes } from "../../shared/domain/languajes.enum"
+
 export default class Mail {
     constructor(
         private _name: string,
@@ -5,7 +7,8 @@ export default class Mail {
         private _email: string,
         private _phone: number,
         private _issue: string,
-        private _description: string = null
+        private _description: string = null,
+        private _languaje: Languajes = Languajes.ES_es
     ) { }
 
     public get name(): string {
@@ -32,6 +35,10 @@ export default class Mail {
         return this._description
     }
 
+    public get languaje(): Languajes {
+        return this._languaje
+    }
+
     public toHtmlString(): string {
         return `<div>
             <p><strong>Nombre: </strong>${this.name} ${this.surnames}<p>
@@ -44,8 +51,8 @@ export default class Mail {
 
     public static fromObject({
         name, surnames, email, 
-        phone, issue, description
+        phone, issue, description, languaje
     }: any): Mail {
-        return new Mail(name, surnames, email, phone, issue, description)
+        return new Mail(name, surnames, email, phone, issue, description, languaje)
     }
 }
