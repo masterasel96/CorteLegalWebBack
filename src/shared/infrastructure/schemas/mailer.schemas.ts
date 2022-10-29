@@ -15,8 +15,7 @@ export const sendMailSchema: Schema = {
             format: "email"
         },
         phone: {
-            type: "number",
-            minimum: 99999
+            type: "string"
         },
         issue: {
             type: "string",
