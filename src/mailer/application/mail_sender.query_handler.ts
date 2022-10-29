@@ -7,7 +7,7 @@ export default class MailSenderQueryHandler {
     ) {
     }
 
-    public send(mail: Mail): void {
-        this.mailerPort.send(mail)
+    public async send(mail: Mail): Promise<boolean> {
+        return await this.mailerPort.send(mail)
     }
 }

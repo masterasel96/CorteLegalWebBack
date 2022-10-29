@@ -18,13 +18,14 @@ export default class MailerController extends BaseController {
         this.router.post('/', (req, res) => this.send(req, res))
     }
 
-    private send(req: Request, res: Response) {
+    private async send(req: Request, res: Response) {
         try {
             this.auth(req)
             this.validate(req, sendMailSchema)
             const mail = Mail.fromObject(req.body)
-            this.mailSenderQH.send(mail)
-            this.successJson(res, HttpMessages.SUCCESS_OPERATION_MESSAGE)
+            const response = await this.mailSenderQH.send(mail)
+            response ? this.successJson(res, HttpMessages.SUCCESS_OPERATION_MESSAGE, { response }) :
+                this.successJson(res, HttpMessages.FAIL_OPERATION_MESSAGE, { response })
         } catch (error) {
             this.catchError(res, error)
         }
