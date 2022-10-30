@@ -1,6 +1,6 @@
 {
   "name": "cortelegalwebback",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Back Api for Corte Legal Lawyers Web",
   "main": "index.js",
   "scripts": {
