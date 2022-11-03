@@ -1,7 +1,8 @@
 import authv, { BasicAuthResult } from "basic-auth";
+import rateLimit, { RateLimitRequestHandler } from 'express-rate-limit';
 import { Request, Response, Router } from "express";
 import { Schema, ValidationError, Validator } from 'jsonschema';
-import { HttpCodes } from "../domain/http.enum";
+import { HttpCodes, TooManyRequest } from "../domain/http.enum";
 import Error from "../domain/domain.error";
 import { InvalidApiKeyException, InvalidUserException } from "../domain/exceptions/auth.exception";
 import { InvalidSchemaException } from "../domain/exceptions/validation.exception";
@@ -22,6 +23,20 @@ export default abstract class BaseController {
 
     public get router(): Router {
         return this._router
+    }
+
+    /**
+     * 
+     * @param time in minutes
+     */
+    protected rateLimiter(time: number, max: number): RateLimitRequestHandler {
+        return rateLimit({
+            windowMs: time * 60 * 1000,
+            max,
+            message: TooManyRequest,
+            standardHeaders: true,
+            legacyHeaders: false
+        })
     }
 
     /**

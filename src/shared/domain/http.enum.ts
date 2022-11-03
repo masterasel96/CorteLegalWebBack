@@ -28,3 +28,5 @@ export enum HttpCodes {
     HTTP_BAD_REQUEST = 400,
     HTTP_INTERNAL_ERROR = 500
 }
+
+export const TooManyRequest = "Too many requests from this ip, are you trying to hack my app?"

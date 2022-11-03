@@ -15,7 +15,7 @@ export default class MailerController extends BaseController {
     }
 
     protected config(): void {
-        this.router.post('/', (req, res) => this.send(req, res))
+        this.router.post('/', this.rateLimiter(60, 3), (req, res) => this.send(req, res))
     }
 
     private async send(req: Request, res: Response) {
