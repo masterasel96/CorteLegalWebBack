@@ -18,8 +18,7 @@ export const sendMailSchema: Schema = {
             type: "string"
         },
         issue: {
-            type: "string",
-            minLength: 6
+            type: "string"
         },
         description: {
             type: "string"
