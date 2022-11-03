@@ -32,7 +32,7 @@ export default class Server {
     try {
       this.app.listen(this.app.get('port'), () => {
         console.log(`Corte Legal lawyers Server in mode ${process.env.ENV} on port ${this.app.get('port')}`)
-      });
+      })
     } catch (error) {
       console.error(`Corte Legal lawye Server isn´t working: ${error instanceof Error ? error.message : 'Undefined error'}`)
       return false

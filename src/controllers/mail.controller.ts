@@ -32,7 +32,7 @@ export default class MailerController extends BaseController {
     }
 
     private init(): void {
-        const mailRepository = new MailRepository();
+        const mailRepository = new MailRepository()
         this.mailSenderQH = new MailSenderQueryHandler(mailRepository)
     }
 }

@@ -1,4 +1,4 @@
-import Mail from "./mail.entity";
+import Mail from "./mail.entity"
 
 export default interface MailerPort {
 

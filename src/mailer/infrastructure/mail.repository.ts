@@ -1,12 +1,12 @@
 import { createTransport, Transporter, createTestAccount } from 'nodemailer'
 import { Options as MailOptions } from 'nodemailer/lib/mailer'
-import { Options as TransportOptions } from 'nodemailer/lib/smtp-transport';
-import { SentMessageInfo } from 'nodemailer/lib/sendmail-transport';
-import Mail from '../domain/mail.entity';
-import MailerPort from '../domain/mail.port';
-import { InvalidEnvironmentVariables } from '../domain/exceptions/mail.exception';
-import { Languajes } from '../../shared/domain/languajes.enum';
-import { ES_MailMessages, EN_MailMessages, FR_MailMessages, MailMessages } from '../domain/mail.enum';
+import { Options as TransportOptions } from 'nodemailer/lib/smtp-transport'
+import { SentMessageInfo } from 'nodemailer/lib/sendmail-transport'
+import Mail from '../domain/mail.entity'
+import MailerPort from '../domain/mail.port'
+import { InvalidEnvironmentVariables } from '../domain/exceptions/mail.exception'
+import { Languajes } from '../../shared/domain/languajes.enum'
+import { ES_MailMessages, EN_MailMessages, FR_MailMessages, MailMessages } from '../domain/mail.enum'
 
 export default class MailRepository implements MailerPort {
     constructor(
@@ -23,7 +23,7 @@ export default class MailRepository implements MailerPort {
     }
 
     private async configInDevelopment(): Promise<TransportOptions> {
-        let { user, pass } = await createTestAccount();
+        let { user, pass } = await createTestAccount()
 
         return {
             host: "smtp.ethereal.email",

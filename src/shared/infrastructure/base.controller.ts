@@ -1,11 +1,11 @@
-import authv, { BasicAuthResult } from "basic-auth";
-import rateLimit, { RateLimitRequestHandler } from 'express-rate-limit';
-import { Request, Response, Router } from "express";
-import { Schema, ValidationError, Validator } from 'jsonschema';
-import { HttpCodes, TooManyRequest } from "../domain/http.enum";
-import Error from "../domain/domain.error";
-import { InvalidApiKeyException, InvalidUserException } from "../domain/exceptions/auth.exception";
-import { InvalidSchemaException } from "../domain/exceptions/validation.exception";
+import authv, { BasicAuthResult } from "basic-auth"
+import rateLimit, { RateLimitRequestHandler } from 'express-rate-limit'
+import { Request, Response, Router } from "express"
+import { Schema, ValidationError, Validator } from 'jsonschema'
+import { HttpCodes, TooManyRequest } from "../domain/http.enum"
+import Error from "../domain/domain.error"
+import { InvalidApiKeyException, InvalidUserException } from "../domain/exceptions/auth.exception"
+import { InvalidSchemaException } from "../domain/exceptions/validation.exception"
 
 export default abstract class BaseController {
 

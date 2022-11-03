@@ -7,10 +7,10 @@ export default class DomainError extends Error {
     }
 
     public get message(): string {
-        return this._message;
+        return this._message
     }
 
     public get code(): number {
-        return this._code;
+        return this._code
     }
 }
