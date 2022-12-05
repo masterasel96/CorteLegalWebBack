@@ -18,8 +18,20 @@ export default class Server {
 
   public config(): void {
     this.app.set('port', 3000)
+    this.app.use("*", (req, res, next) => {
+      res.header("Access-Control-Allow-Origin", process.env.ALLOW_ORIGIN)
+      res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization, X-Api-Key")
+      res.header("Access-Control-Allow-Methods: GET, POST, PUT")
+      next();
+    });
+    this.app.use(cors(
+      {
+        origin: new RegExp(process.env.ALLOW_ORIGIN),
+        methods: "GET,PUT,POST",
+        allowedHeaders: "Origin,X-Requested-With,Content-Type,Accept,Authorization,X-Api-Key"
+      }
+    ))
     this.app.use(helmet())
-    this.app.use(cors())
     this.app.use(express.json())
     this.app.use(express.urlencoded({ extended: false }))
   }
